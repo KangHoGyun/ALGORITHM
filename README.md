@@ -8,7 +8,7 @@
 
 ## :page_with_curl: 프로그래밍 언어
 
-- Java
+- Java 11
 
 ## :clap: 목표
 
