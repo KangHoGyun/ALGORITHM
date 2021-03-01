@@ -3,101 +3,64 @@ package implementation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
 
 public class Solution_3085 {
-	static int N;
+	static int N, res;
 	static char[][] arr;
 
-	static class Info {
-		char color;
-		int deep;
-
-		public Info(char color, int deep) {
-			super();
-			this.color = color;
-			this.deep = deep;
-		}
-	}
-
-	public static int init() {
-		Stack<Info> stk = new Stack<>();
+	public static void calc() {
 		int maxSize = 0;
 		for(int i=0; i<N; ++i) { // 행 조사
-			stk.add(new Info(arr[i][0], 1));
+			int start = arr[i][0];
+			int startCnt = 1;
 			for(int j=1; j<N; ++j) {
-				if(stk.peek().color == arr[i][j]) {
-					stk.add(new Info(arr[i][j], stk.peek().deep+1));
+				if(start == arr[i][j]) {
+					startCnt++;
 				}else {
-					stk.add(new Info(arr[i][j], 1));
+					startCnt = 1;
 				}
-			}
-			for(int j=0; j<N; ++j) {
-				int tmp = stk.peek().deep;
-				maxSize = Math.max(tmp, maxSize);
-				stk.pop();
+				maxSize = Math.max(maxSize, startCnt);
+				start = arr[i][j];
 			}
 		}
-		stk.clear();
+				
 		for(int i=0; i<N; ++i) { // 열 조사
-			stk.add(new Info(arr[0][i], 1));
+			int start = arr[0][i];
+			int startCnt = 1;
 			for(int j=1; j<N; ++j) {
-				if(stk.peek().color == arr[j][i]) {
-					stk.add(new Info(arr[j][i], stk.peek().deep+1));
+				if(start == arr[j][i]) {
+					startCnt++;
 				}else {
-					stk.add(new Info(arr[j][i], 1));
+					startCnt = 1;
 				}
-			}
-			for(int j=0; j<N; ++j) {
-				int tmp = stk.peek().deep;
-				maxSize = Math.max(tmp, maxSize);
-				stk.pop();
+				maxSize = Math.max(maxSize, startCnt);
+				start = arr[j][i];
 			}
 		}
-		return maxSize;
+		res = Math.max(res, maxSize);
 	}
-	public static int swap(int x, int y) {
+	public static void swap1(int x, int y) {
 		char tmpChar = arr[x][y];
 		arr[x][y] = arr[x][y + 1];
 		arr[x][y + 1] = tmpChar;
 
-		Stack<Info> stk = new Stack<>();
-		int maxSize = 0;
-		for (int i = y; i < y + 2; ++i) { // 열 조사
-			stk.add(new Info(arr[0][i], 1));
-			for (int j = 1; j < N; ++j) {
-				if (stk.peek().color == arr[j][i]) {
-					stk.add(new Info(arr[j][i], stk.peek().deep + 1));
-				} else {
-					stk.add(new Info(arr[j][i], 1));
-				}
-			}
-			for (int j = 0; j < N; ++j) {
-				int tmp = stk.peek().deep;
-				maxSize = Math.max(tmp, maxSize);
-				stk.pop();
-			}
-		}
-		stk.clear();
-		stk.add(new Info(arr[x][0], 1));
-		for (int j = 1; j < N; ++j) {
-			if (stk.peek().color == arr[x][j]) {
-				stk.add(new Info(arr[x][j], stk.peek().deep + 1));
-			} else {
-				stk.add(new Info(arr[x][j], 1));
-			}
-		}
-		for (int j = 0; j < N; ++j) {
-			int tmp = stk.peek().deep;
-			maxSize = Math.max(tmp, maxSize);
-			stk.pop();
-		}
-
+		calc();
+		
 		tmpChar = arr[x][y];
 		arr[x][y] = arr[x][y + 1];
 		arr[x][y + 1] = tmpChar;
-
-		return maxSize;
+	}
+	
+	public static void swap2(int y, int x) {
+		char tmpChar = arr[x][y];
+		arr[x][y] = arr[x + 1][y];
+		arr[x + 1][y] = tmpChar;
+		
+		calc();
+		
+		tmpChar = arr[x][y];
+		arr[x][y] = arr[x + 1][y];
+		arr[x + 1][y] = tmpChar;
 	}
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -110,10 +73,11 @@ public class Solution_3085 {
 				arr[i][j] = str.charAt(j);
 			}
 		}
-		int res = init();
+		res = 0;
 		for (int i = 0; i < N; ++i) {
 			for (int j = 0; j < N - 1; ++j) {
-				res = Math.max(res, swap(i, j));
+				swap1(i, j);
+				swap2(i, j);
 			}
 		}
 		System.out.println(res);
