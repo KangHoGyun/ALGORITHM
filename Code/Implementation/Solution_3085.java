@@ -22,9 +22,7 @@ public class Solution_3085 {
 				maxSize = Math.max(maxSize, startCnt);
 				start = arr[i][j];
 			}
-		}
-				
-		for(int i=0; i<N; ++i) { // 열 조사
+		}for(int i=0; i<N; ++i) { // 열 조사
 			int start = arr[0][i];
 			int startCnt = 1;
 			for(int j=1; j<N; ++j) {
