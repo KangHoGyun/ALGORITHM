@@ -36,13 +36,13 @@ public class Solution_2980 {
 		}
 		int start = q.peek().D;
 		int t = 0;
-		int dist = 0;
+		int cnt = 0;
 		while (true) {
-			if (dist == L)
+			if (cnt == L)
 				break;
-			if (dist != start) {
+			if (cnt != start) {
 				t++;
-				dist++;
+				cnt++;
 			} else {
 				int tmp = q.peek().R + q.peek().G;
 				if (t % tmp < q.peek().R) {
@@ -53,7 +53,7 @@ public class Solution_2980 {
 					if (q.size() >= 1)
 						start = q.peek().D;
 					t++;
-					dist++;
+					cnt++;
 				}
 			}
 		}
