@@ -16,9 +16,9 @@ public class Solution_2473 {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		arr = new long[N];
 		res = new long[3];
-		for (int i = 0; i < N; ++i) {
+		for (int i = 0; i < N; ++i) 
 			arr[i] = Long.parseLong(st.nextToken());
-		}
+		
 		long sum = 3000000000L;
 		Arrays.sort(arr);
 		for (int start = 0; start < N - 2; ++start) {
