@@ -11,7 +11,7 @@ public class Solution_7453 {
 	static int[][] arr;
 	static long[] arr2;
 	static long[] arr3;
-
+	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
@@ -35,7 +35,7 @@ public class Solution_7453 {
 		}
 		Arrays.sort(arr2);
 		Arrays.sort(arr3);
-		int res = 0;
+		long res = 0;
 		int start = 0;
 		int end = N * N - 1;
 		while (start < N * N && end >= 0) {
