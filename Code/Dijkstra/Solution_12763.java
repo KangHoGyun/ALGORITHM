@@ -1,4 +1,4 @@
-package solve;
+package graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class Solution_12763 {
 		}
 	}
 
-	public static void dijkstra() {
+	public static void bfs() {
 		Queue<Info> pq = new LinkedList<>();
 		pq.add(new Info(1, 0, 0));
 		cost[1] = 0;
@@ -56,7 +56,25 @@ public class Solution_12763 {
 			}
 		}
 	}
-
+	
+	public static void dfs(int start) {
+		if(start == N) {
+			res = Math.min(res, cost[start]);
+			return;
+		}
+		for(int i=0; i<arr[start].size(); ++i) {
+			int next = arr[start].get(i).end;
+			int nextCost = arr[start].get(i).cost;
+			int nextTime = arr[start].get(i).time;
+			if (cost[next] <= cost[start] + nextCost && time[next] <= time[start] + nextTime)
+				continue;
+			if (cost[start] + nextCost > M || time[start] + nextTime > T)
+				continue;
+			cost[next] = cost[start] + nextCost;
+			time[next] = time[start] + nextTime;
+			dfs(next);
+		}
+	}
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
@@ -64,12 +82,12 @@ public class Solution_12763 {
 		T = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		L = Integer.parseInt(br.readLine());
-		arr = new ArrayList[N + 2];
-		cost = new int[N + 2]; // 1 ~ N + 1
-		time = new int[N + 2];
+		arr = new ArrayList[N + 1];
+		cost = new int[N + 1]; // 1 ~ N + 1
+		time = new int[N + 1];
 		Arrays.fill(cost, INF);
 		Arrays.fill(time, INF);
-		for (int i = 0; i < N + 2; ++i)
+		for (int i = 0; i < N + 1; ++i)
 			arr[i] = new ArrayList<>();
 
 		for (int i = 0; i < L; ++i) {
@@ -82,7 +100,9 @@ public class Solution_12763 {
 			arr[end].add(new Info(start, time, cost));
 		}
 		res = 987654321;
-		dijkstra();
+		cost[1] = 0;
+		time[1] = 0;
+		dfs(1); //bfs로 하면 안됨.
 		if (res > M)
 			System.out.println(-1);
 		else
