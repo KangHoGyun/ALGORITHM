@@ -24,7 +24,7 @@ public class Solution_11657 {
 	}
 
 	public static void bellman() {
-		boolean isCycle = false;
+		boolean cycle = false;
 		cost[1] = 0;
 		for (int i = 0; i < N; ++i) {
 			for (int j = 1; j <= N; ++j) {
@@ -34,13 +34,13 @@ public class Solution_11657 {
 					if (cost[j] != INF && cost[next] > cost[j] + nextCost) {
 						cost[next] = cost[j] + nextCost;
 						if (i == N - 1)
-							isCycle = true;
+							cycle = true;
 					}
 				}
 			}
 		}
 		StringBuilder sb = new StringBuilder();
-		if (isCycle) {
+		if (cycle) {
 			System.out.println("-1");
 			System.exit(0);
 		} else {
