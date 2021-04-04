@@ -32,7 +32,7 @@ public class Solution_11779 {
 		}
 	}
 
-	public static void bfs() {
+	public static void dijkstra() {
 		boolean[] visited = new boolean[N + 1];
 		PriorityQueue<Info> pq = new PriorityQueue<>();
 		pq.add(new Info(start, 0));
@@ -83,7 +83,7 @@ public class Solution_11779 {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		start = Integer.parseInt(st.nextToken());
 		end = Integer.parseInt(st.nextToken());
-		bfs();
+		dijkstra();
 		System.out.println(cost[end]);
 		System.out.println(stk.size());
 		int stkSize = stk.size();
