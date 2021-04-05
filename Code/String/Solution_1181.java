@@ -9,7 +9,6 @@ import java.util.Collections;
 public class Solution_1181 {
 	static class Info implements Comparable<Info>{
 		String str;
-
 		public Info(String str) {
 			super();
 			this.str = str;
@@ -20,9 +19,7 @@ public class Solution_1181 {
 				return str.compareTo(a.str);
 			}else
 				return str.length() - a.str.length();
-			
-		}
-		
+		}	
 	}
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,7 +29,6 @@ public class Solution_1181 {
 			arr.add(new Info(br.readLine()));
 		}
 		Collections.sort(arr);
-		
 		for(int i=1; i<arr.size(); ++i) {
 			if(arr.get(i).str.equals(arr.get(i - 1).str)) {
 				arr.remove(i);
