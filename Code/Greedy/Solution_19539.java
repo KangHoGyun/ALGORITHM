@@ -14,21 +14,21 @@ public class Solution_19539 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		arr = new int[N];
-		int sum = 0;
+		int res = 0;
 		int sumDivideTwo = 0;
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; ++i) {
 			arr[i] = Integer.parseInt(st.nextToken());
-			sum+=arr[i];
-			sumDivideTwo += arr[i]/2;
+			res += arr[i];
+			sumDivideTwo += arr[i] / 2;
 		}
-		if(sum%3 == 0) {
-			if(sumDivideTwo >= sum/3) {
+		if (res % 3 == 0) {
+			if (sumDivideTwo >= res / 3) {
 				System.out.println("YES");
-			}else {
+			} else {
 				System.out.println("NO");
 			}
-		}else
+		} else
 			System.out.println("NO");
 	}
 }
